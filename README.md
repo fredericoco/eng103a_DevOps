@@ -48,3 +48,37 @@ end
 - Upgrades all packages that have available upgrades `apt get upgrade`
 - Install nginx `apt get install nginx`
 - `exit` will exit the VM
+
+### Linux basics
+- Who am I (computer wise) `uname -a`
+- Where am I `pwd`
+- list dir/file `ls`
+- list all including hidden folder/files `ls -a`
+- make dir (directory) `mkdir name-of-dir`
+- navigate to dir `cd name-of-dir`
+- how to create a file `touch file-name` or `nano file-name`
+- How to display content of the file `cat file-name`
+- how to remove file `rm -rf file-name`
+- How to copy file `cp file-destination-name final`
+- Research on google how to move a file `test.txt `inside `move` folder
+- To move a file into a location `mv file-moving destination`
+- How to check running processes `top` and ctrl c to get terminal back
+
+#### Permissions
+- READ Write executable only
+- how to check permissions `ll`
+- change permission `chmod permission -file`
+
+### Bash scripting
+  - to run updates `sudo apt-get update -y`
+  - run upgrades `sudo apt-get upgrade -y`
+  - to install nginx `sudo apt-get install nginx -y`
+
+
+### Automating the process of installation of the dependencies (1st Febuary 2021 task)
+- put the commands listed in the provisions file
+- `sudo apt install python-software-properties`
+- `curl -sl https://deb.nodesource.com/setup_6.x | sudo -E bash -`
+- `sudo apt-get install -y nodejs`
+- `sudo npm install pm2 -g`
+
