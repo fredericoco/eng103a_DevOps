@@ -19,7 +19,8 @@ In order to use a VM install, ruby, vagrant and virtual machine. See notes from 
 - Which port di we need to allow?
 - What hardware specs to we need to run on it?
 ### Development Env
-https://github.com/fredericoco/eng103a_DevOps/issues/1#issue-1122141616
+![Screenshot_(185)](https://user-images.githubusercontent.com/39882040/152195680-931443ea-5cb1-401d-83b8-f9c40b0dbc77.png)
+
 ```
 
 Vagrant.configure("2") do |config|
