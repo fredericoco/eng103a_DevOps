@@ -115,7 +115,11 @@ end
 `forever start app.js`
 
 - When you execute vagrant up in the termina, make sure to call `vagrant up --provision`
-
+### Setting up 
+- navigate to the app folder where app.js is located
+- `npm install` and then `npm start`
+- Should say on the terminal `your app is running and listening on port 3000`
+- Go to browser `192.168.10.100` to see if it works
 ### Linux Variables
 Similar to python but different
 - Create Linux Var `FIRST_NAME=FREDERICK` 

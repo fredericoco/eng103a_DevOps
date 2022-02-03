@@ -10,7 +10,7 @@ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo npm install pm2 -g
 
 
-#cd /home/vagrant/app/app/app
+cd /home/vagrant/app/app/app
 #npm install forever -g
-#npm install
+npm install
 #forever start app.js
