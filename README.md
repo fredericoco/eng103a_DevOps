@@ -201,5 +201,31 @@ Vagrant.configure("2") do |config|
  - `vagrant up` will run both VMs
  - If they boot us sucessfully `vagrant status` will show them both running
  - And to enter the VM you have to type `vagrant ssh VM-name` VM-name using to be specific if there are more than one VM
-
+## Setting up Mongdb
+- Create 2 VMs (see earlier steps)
+- export DB_Host = db_ip:27017/posts
+- Mongodb IP: 192.168.10.150
+- Mongodb dependencies
+- go into db
+-  do `sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA312927`
+-  then do `echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list`
+-  Then do `sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20`
+-  check the status of mongod by `sudo systemctl status mongod`
+-  Restart it `sudo systemctl restart mongod`
+-  check status again
+-  Go to `cd /etc`
+-  edit the mongod file using `nano mongod.conf`
+-  check it using `cat mongod.conf` and put the below information in
+  ```
+network interfaces
+net:
+  port: 27017
+  bindIp: 0.0.0.0
+  ```
+  - go to the directory where app.js is located
+- `npm start`
+- export `export  DB_HOST='mongodb://192.168.10.150:27017/posts'`
+- `printenv DB_HOST`
+- node seeds/seed.js
+- npm star
 ## Troubleshooting

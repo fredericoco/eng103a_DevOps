@@ -20,6 +20,7 @@ Vagrant.configure("2") do |config|
      #app.vm.synced_folder ".", "/home/vagrant/environment"
  
      app.vm.provision "shell", path: "provisions.sh", privileged: false
+     db.vm.provision "shell", path: "provisions_db.sh"
  
     end
  
