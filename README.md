@@ -216,16 +216,107 @@ Vagrant.configure("2") do |config|
 -  Go to `cd /etc`
 -  edit the mongod file using `nano mongod.conf`
 -  check it using `cat mongod.conf` and put the below information in
-  ```
+```
 network interfaces
 net:
   port: 27017
   bindIp: 0.0.0.0
-  ```
+```
   - go to the directory where app.js is located
 - `npm start`
 - export `export  DB_HOST='mongodb://192.168.10.150:27017/posts'`
 - `printenv DB_HOST`
 - node seeds/seed.js
-- npm star
+- npm start
+  
+### Multi Machine Task and automation
+Create a provisions_db file in which is linked the vagrant file, this is shown below. 
+```
+#!/bin/bash
+sudo apt-get update -y 
+sudo apt-get upgrade -y
+sudo sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv D68FA50FEA312927
+echo "deb https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+sudo apt-get update -y 
+sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
+sudo cp /home/vagrant/db/mongod.conf /etc/
+sudo systemctl restart mongod
+``` 
+- bin/bash is used to say that it is a shell structure.
+- `sudo apt-get` `update` and `upgrade` to update and upgrade the environment
+- The next lines are used to install mangodb 3.20, note some of the variables are mangod(processes in linux whcih are running in the background are called deamons)
+- `sudo cp /home/vagrant/db/mongod.conf /etc/` is a complicated command. The `cp` is copy, the next part is the directory of where the `mongod.conf` file is the source and `/etc/` is the destionation.
+- `sudo systemctl restart mongod` restart the mongod (daemon)
+
+The vagrant file is also updated. It now contains a line to link it to a provisions.sh file `provisions_db.sh` and a line which syncs it to the folder `/home/vagrant/db`.
+```
+Vagrant.configure("2") do |config|
+  config.vm.define "db" do |db|
+ 
+    db.vm.box = "ubuntu/xenial64"
+
+    db.vm.network "private_network", ip: "192.168.10.150"
+    db.vm.synced_folder ".", "/home/vagrant/db"
+    db.vm.provision "shell", path: "provisions_db.sh", privileged: false
+
+  end  
+
+    config.vm.define "app" do |app|
+ 
+     app.vm.box = "ubuntu/xenial64"
+ 
+     app.vm.network "private_network", ip: "192.168.10.100"
+ 
+ 
+ 
+     app.vm.synced_folder ".", "/home/vagrant/app"
+ 
+     #app.vm.synced_folder ".", "/home/vagrant/environment"
+ 
+     app.vm.provision "shell", path: "provisions.sh", privileged: false
+     
+ 
+    end
+ 
+ 
+ 
+   
+ end  
+```
+The provisions file for the app is also updated to make sure it includes the automatic setup of the proxy server and attributing the variable to the `DB_HOSt` so that it does it automatically appends it to the bashrc script (see linux variables for why this is done). The last line is used install npm in the correct location and 
+```
+#!/bin/bash
+sudo apt-get update -y
+sudo apt-get upgrade -y
+sudo apt-get install nginx -y
+sudo apt-get install python-software-properties
+#sudo apt-get install rake -y
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install nodejs -y
+#sudo apt-get install npm -y
+sudo npm install pm2 -g
+sudo cp /home/vagrant/app/default /etc/nginx/sites-available/
+sudo systemctl restart nginx
+echo "export DB_HOST='mongodb://192.168.10.150:27017/posts'" >> /home/vagrant/.bashrc
+source /home/vagrant/.bashrc
+cd /home/vagrant/app/app/app && npm install && node /seeds/seed.js
+
+#cd /home/vagrant/app/app/app
+#npm install forever -g
+#
+#forever start app.js
+```
+## AMAZON WEB SERVICES (AWS)
+Amazon web services is a service which allows companies to outsource computing power to larger computers in the cloud, the computing power is housed in several warehouses around the world.More warehouses will be built in the future in various locations around the world.
+- Use the command `ssh -i "~/.ssh/eng103a.pem" ubuntu@ec2-54-75-106-215.eu-west-1.compute.amazonaws.com` is used to to get into the environment in the git bash terminal. All of the same commands work in this git environment, so have fun.  There's no need to use vagrant since there already is a virtual environment.
+
+- Make sure the access key is avialable when you call the acess command above, in the ~/.ssh file directory. In the console you type.
+```
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install nginx
+sudo systemctl status nginx
+```  
+- when you set up the nginx web page, you have to install EVERYTHING in order to get it to work. See the provisions file notes from earlier. Ironically, see the automating the process of installing for further instructions.
+- After the installation of all the necessary packages make sure you set up an access port, on the AWS website.
 ## Troubleshooting
