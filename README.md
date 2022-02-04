@@ -307,7 +307,7 @@ cd /home/vagrant/app/app/app && npm install && node /seeds/seed.js
 #forever start app.js
 ```
 ## AMAZON WEB SERVICES (AWS)
-Amazon web services is a service which allows companies to outsource computing power to larger computers in the cloud, the computing power is housed in several warehouses around the world.More warehouses will be built in the future in various locations around the world.
+Amazon web services is a service which allows companies to outsource computing power to larger computers in the cloud, the computing power is housed in several warehouses around the world.More warehouses will be built in the future in various locations around the world. According to Amazon's Q3 report, AWS accounted for approximately 15% of their total revenue at $16.8 billion.
 - Use the command `ssh -i "~/.ssh/eng103a.pem" ubuntu@ec2-54-75-106-215.eu-west-1.compute.amazonaws.com` is used to to get into the environment in the git bash terminal. All of the same commands work in this git environment, so have fun.  There's no need to use vagrant since there already is a virtual environment.
 
 - Make sure the access key is avialable when you call the acess command above, in the ~/.ssh file directory. In the console you type.
@@ -318,5 +318,6 @@ sudo apt install nginx
 sudo systemctl status nginx
 ```  
 - when you set up the nginx web page, you have to install EVERYTHING in order to get it to work. See the provisions file notes from earlier. Ironically, see the automating the process of installing for further instructions.
-- After the installation of all the necessary packages make sure you set up an access port, on the AWS website.
-## Troubleshooting
+- After the installation of all the necessary packages make sure you set up an access port, on the AWS website. Click on `security`,click on the `security groups` link, then you `add rule`> `customer TCP` > Port Range : `3000` > Source :`anywhere-IPv4` > Description `content is optional but useful for documentation`.]
+-If everything is done correctly it should work.
+
