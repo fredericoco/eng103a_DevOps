@@ -201,6 +201,7 @@ Vagrant.configure("2") do |config|
  - `vagrant up` will run both VMs
  - If they boot us sucessfully `vagrant status` will show them both running
  - And to enter the VM you have to type `vagrant ssh VM-name` VM-name using to be specific if there are more than one VM
+ - ![Screenshot_(231) (1)](https://user-images.githubusercontent.com/39882040/152503482-d4b8505c-458a-4f65-9fe6-0398cd50d203.png)
 ## Setting up Mongdb
 - Create 2 VMs (see earlier steps)
 - export DB_Host = db_ip:27017/posts
