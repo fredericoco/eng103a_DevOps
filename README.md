@@ -309,7 +309,10 @@ cd /home/vagrant/app/app/app && npm install && node /seeds/seed.js
 ```
 ## AMAZON WEB SERVICES (AWS)
 Amazon web services is a service which allows companies to outsource computing power to larger computers in the cloud, the computing power is housed in several warehouses around the world.More warehouses will be built in the future in various locations around the world. According to Amazon's Q3 report, AWS accounted for approximately 15% of their total revenue at $16.8 billion.
-- Use the command `ssh -i "~/.ssh/eng103a.pem" ubuntu@ec2-54-75-106-215.eu-west-1.compute.amazonaws.com` is used to to get into the environment in the git bash terminal. All of the same commands work in this git environment, so have fun.  There's no need to use vagrant since there already is a virtual environment.
+- On AWS to launch an instance, after signing in, search for `Ubuntu Server 18.04 LTS`, Select the `64-Bit x86` option
+- Use the command `ssh` . This `ssh` command is found in the instance part of the AWS, click on the connect button and copy the ssh link example. If this command is put in the git bash terminal it should enter the interactive environment.Thiss should be done in the same directory as the ssh file.
+- Note this link can change so initialise the the instance on the website, click on the link starting with i and then copy the ssh link under example.
+- All of the same commands work in this git environment, so have fun.  There's no need to use vagrant since there already is a virtual environment.
 
 - Make sure the access key is avialable when you call the acess command above, in the ~/.ssh file directory. In the console you type.
 ```
@@ -322,3 +325,10 @@ sudo systemctl status nginx
 - After the installation of all the necessary packages make sure you set up an access port, on the AWS website. Click on `security`,click on the `security groups` link, then you `add rule`> `customer TCP` > Port Range : `3000` > Source :`anywhere-IPv4` > Description `content is optional but useful for documentation`.]
 -If everything is done correctly it should work.
 
+# Accessing the DB through AWS
+- Set up an EC2 instance for DB through AWS.
+- Ubuntu Server 18.04.64 bit (x86), default instance type, configure it to have 1 instance set to Default eu-west-1a, Enable, default storage, add eng103a to value to make it easier to find and add name to make sure it's named after you, change security group name to the one you used earlier, change the type to custom TCP, Protocol to TCP,port range 27017, source Anywhere, description should be used for writing up. Make sure to set the key pair to the eng103a.
+- Access the VM by using gitbash and the command from the connect window discussed earlier.
+-  Install Mongodb on this VM following the instructions given earlier.
+-  Go the app VM follow the intructions from earlier, but change the IP in the `export` variable to the one on AWS for the DB VM. `node seed/seeds.js` and then `npm start`,  this should create the webpage.
+-  One issue I had was that I forgot to change the IP on `DB_HOST` first time around so I had to edit it using `nano`.
