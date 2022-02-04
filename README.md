@@ -332,3 +332,4 @@ sudo systemctl status nginx
 -  Install Mongodb on this VM following the instructions given earlier.
 -  Go the app VM follow the intructions from earlier, but change the IP in the `export` variable to the one on AWS for the DB VM. `node seed/seeds.js` and then `npm start`,  this should create the webpage.
 -  One issue I had was that I forgot to change the IP on `DB_HOST` first time around so I had to edit it using `nano`.
+- I also had to put the app folder on again.
