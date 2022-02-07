@@ -340,7 +340,9 @@ Two tier architecture systems are defined as a piece of software where the prese
 There are some advantages assosiated with a two tier system:
 - Relatively easy to maintain and modify
 - Communication is faster
-There are also some disadvantages associated with this type of architecture:
+  
+ There are also some disadvantages associated with this type of architecture:
 - Performance is degraded when the amount of users increases
 - Cost-ineffective
+  
 There is a Quora post which discusess this in a lot of detail. https://www.quora.com/What-are-the-advantages-and-disadvantages-of-architecture-1-tier-2-tier-3-tier-and-n-tier
