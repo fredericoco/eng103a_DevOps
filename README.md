@@ -345,4 +345,56 @@ There are some advantages assosiated with a two tier system:
 - Performance is degraded when the amount of users increases
 - Cost-ineffective
   
-There is a Quora post which discusess this in a lot of detail. https://www.quora.com/What-are-the-advantages-and-disadvantages-of-architecture-1-tier-2-tier-3-tier-and-n-tier
+There is a Quora post which discusess this in a lot of detail.Specifically for databases. https://www.quora.com/What-are-the-advantages-and-disadvantages-of-architecture-1-tier-2-tier-3-tier-and-n-tier
+
+# Amazon machine image (AMI)
+AWS Amazon machine images is a service which contains configuration for an instance. It provides the information to launch an instance. AMI need to be specified on launch and you can launch multiple instances if you use AMIs from the same configuration.
+
+Benefits:
+ - So it helps us save the data. 
+- It Helps automate the deployment on the cloud.
+### Creating an AMI and launching an instance from it
+- click on action -> Image and template -> Create image
+- name it using the same convention "eng103a_Name_VM_name_ami" and add tag with same information.
+- Go to Images/AMI to see the created AMI
+- Select the AMI you want to copy and launch an instance, change the subnet to to 1a
+- Add name and tag normally to the Tag section
+- On the security group section choose the one created earlier with the other instances
+- Make sure the key pair is the same 
+
+## Issues today
+- ssh command had the wrong IP so I changed the security group rules so that port 22 would update. This was done to accomadate my dynamic IP.
+- On the ssh link, change the root to ubuntu
+- Make sure the `/etc/nginx/sites-available` file works, if there are persistent issues with it try checking the file and reposting the file content. 
+- Be mindful when you send code via discord
+
+# Monitoring software with cloudwatch
+What should we monitor:
+- Number of uers-network
+- CPU utilisation
+- Memory availability
+- Status 200 - API call to check health of the instance
+We need a system that can monitor networks to see if it's handling the demand well.
+
+We can use Cloudwatch for this. For example, we can use it to say if CPU usage is greater than 50%. This will send a notification and a log to someone responsible.
+
+An AWS service called SNS(simple notification service) can be used to notify those who know what to do. This can also be used for Auto Scaling. This will scale out and increase the CPU supply to accomadate for the command.
+
+- scaling out: same amount of servers with multiple instances
+- scaling up: increasing 
+
+Add pc example - Scaling out is adding more computers / CPUs to deal with the load (autoscaler, spinning up more VMs to handle the load).
+- Scaling up is increasing the minimum requirement by improving hardware in the beginning. (Going from T2.micro to T2.medium)
+
+We can create an alarm for various metrics on cloudwatch. Make sure you use your istance ID and the metric you want to find to locate the correct data. For example, for CPU utilization search this term and istance ID to find the correct metric. There should be data on the correct metric
+
+# Alert Management
+If one of the conditions is met and there is an issue, someone on shift will 
+
+# S3
+S3 is a simple storage service. A database available on AWS. It's available globally and you can store anything. Used for disaster recovery (DR). We can apply Create bucket/object , read,update and delete (CRUD) actions. If there were a disaster in the location where our instances are located (Ireland for us) we would lose a lot of work.So we need to back them up. We need AWS SEC and ACCESS KEYs to access the S3. 
+
+S3 storage classes:
+- standard: You can access data anytime
+- Glacier: infrequent data access(pay less)
+- research rest in own time
